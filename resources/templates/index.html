@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Заметки</h1>
+
+{% if mails %}
+<ul>
+
+    {% for mail in mails %}
+    <li>
+        <h4><a href="/mail/{{mail._id}}">{{mail.subject}}</a></h4>
+        <small>{{mail.created|format-datetime}}</small>
+        <hr>
+        <a href="/edit/{{mail._id}}">Редактировать</a> | <a href="/delete/{{mail._id}}">Удалить</a>
+    </li>
+    {% endfor %}
+
+</ul>
+{% else %}
+<strong>Писем еще нет</strong>
+{% endif %}
+
+{% endblock %}

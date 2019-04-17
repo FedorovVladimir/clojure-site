@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{mail.title}}</h1>
+<small>{{mail.created|format-datetime}}</small>
+
+<p>{{mail.text}}</p>
+
+{% endblock %}

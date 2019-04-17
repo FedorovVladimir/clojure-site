@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{title}}</title>
+
+</head>
+<body>
+
+<ul>
+    <li>
+        {% ifequal page "index.html" %}
+        <strong>Все письма</strong>
+        {% else %}
+        <a href="/">Все письма</a>
+        {% endifequal %}
+    </li>
+    <li>
+        {% ifequal page "create.html" %}
+        <strong>Добавить письмо</strong>
+        {% else %}
+        <a href="/create">Добавить песьмо</a>
+        {% endifequal %}
+    </li>
+</ul>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

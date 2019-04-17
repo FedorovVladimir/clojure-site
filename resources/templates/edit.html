@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Редактировать письмо</h1>
+
+<form method="POST">
+
+    {% csrf-field %}
+
+    <input type="hidden" name="id" value="{{mail._id}}">
+
+    <p>
+        <label>Заголовок</label><br>
+        <input type="text" name="subject" value="{{mail.title}}">
+    </p>
+
+    <p>
+        <label>Текст</label><br>
+        <textarea name="text">{{mail.text}}</textarea>
+    </p>
+
+    <input type="submit" value="Сохранить">
+
+</form>
+
+{% endblock %}

@@ -12,8 +12,7 @@
 
     ; Импортируем методы из Java библиотек
     (:import org.bson.types.ObjectId
-             org.joda.time.DateTimeZone)
-  )
+             org.joda.time.DateTimeZone))
 
 ; во избежание ошибок нужно указать часовой пояс
 (DateTimeZone/setDefault DateTimeZone/UTC)
