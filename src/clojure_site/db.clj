@@ -2,32 +2,19 @@
   (:require
 
     ; непосредственно Monger
-    monger.joda-time ; для добавления времени и даты
     [monger.core :as mg]
     [monger.collection :as m]
-    [monger.operators :refer :all]
-
-    ; время и дата
-    [joda-time :as t])
+    [monger.operators :refer :all])
 
     ; Импортируем методы из Java библиотек
-    (:import org.bson.types.ObjectId
-             org.joda.time.DateTimeZone))
-
-; во избежание ошибок нужно указать часовой пояс
-(DateTimeZone/setDefault DateTimeZone/UTC)
+    (:import org.bson.types.ObjectId)
+  )
 
 ; создадим переменную соединения с БД
 (defonce db
-         (let [uri "mongodb://127.0.0.1:27017"
+         (let [uri "mongodb://127.0.0.1:27017/maildb"
                {:keys [db]} (mg/connect-via-uri uri)]
            db))
-
-; приватная функция создания штампа даты и времени
-(defn- date-time
-  "Текущие дата и время"
-  []
-  (t/date-time))
 
 (defn remove-mail
   "Удалить письмо по ее id"
@@ -40,12 +27,9 @@
   "Обновить письмо по ее id"
   [id mail]
   ; Переформатируем строку в id
+  ; todo редактирование не работает
   (let [id (ObjectId. id)]
-    (m/update db "mail" {:id id}
-              ; Обновим помимо документа
-              ; дату его создания
-              {$set (assoc mail
-                      :created (date-time))})))
+    (m/update db "mail" {:id id} mail)))
 
 (defn get-mail
   "Получить письмо по ее id"
@@ -76,6 +60,5 @@
     ; добавим в него сгенерированный id
     ; и штамп даты и времени создания
     (m/insert db "mail" (assoc mail
-                           :_id object-id
-                           :created (date-time)))))
+                           :_id object-id))))
 

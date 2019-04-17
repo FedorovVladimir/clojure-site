@@ -15,10 +15,8 @@
                   [selmer "0.8.2"]
 
                   ; Добавляем Monger
-                  [com.novemberain/monger "2.0.1"]
+                  [com.novemberain/monger "3.1.0"]]
 
-                  ; Дата и время
-                  [clojure.joda-time "0.6.0"]]
 
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler clojure-site.handler/app}

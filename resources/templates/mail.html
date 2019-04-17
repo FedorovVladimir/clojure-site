@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>{{mail.title}}</h1>
-<small>{{mail.created|format-datetime}}</small>
+<h1>{{mail.subject}}</h1>
 
 <p>{{mail.text}}</p>
 

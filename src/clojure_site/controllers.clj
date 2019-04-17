@@ -20,11 +20,11 @@
 
   ; получаем данные из формы
   (let [mail-id (get-in request [:form-params "id"])
-        mail {:title (get-in request [:form-params "subject"])
+        mail {:subject (get-in request [:form-params "subject"])
               :text  (get-in request [:form-params "text"])}]
 
     ; проверяем данные
-    (if (and (not-empty (:title mail))
+    (if (and (not-empty (:subject mail))
              (not-empty (:text mail)))
       ; все хорошо
       (do
@@ -39,11 +39,11 @@
 
   ; получаем данные из формы
   ; (ассоциативный массив)
-  (let [mail {:title (get-in request [:form-params "title"])
+  (let [mail {:subject (get-in request [:form-params "subject"])
               :text (get-in request [:form-params "text"])}]
 
     ; Проверим данные
-    (if (and (not-empty (:title mail))
+    (if (and (not-empty (:subject mail))
              (not-empty (:text mail)))
 
       ; все хорошо

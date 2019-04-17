@@ -36,7 +36,7 @@
                (v/edit mail)))
 
            ; обработчик добавления письма
-           (POST "/create"
+           (POST "/create" request
              (-> c/create))
 
            ; страница добавления письма

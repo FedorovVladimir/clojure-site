@@ -3,10 +3,6 @@
 
     ; "Шаблонизатор"
     [selmer.parser :as parser]
-    [selmer.filters :as filters]
-
-    ; время и дата
-    [joda-time :as t]
 
     ; для HTTP заголовков
     [ring.util.response :refer [content-type response]]
@@ -16,19 +12,6 @@
 
 ; подскажем Selmer где искать наши шаблоны
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
-
-; чтобы привести дату в человеко-понятный формат
-(defn format-date-and-time
-  "Отформатировать дату и время"
-  [date]
-  (let [formatter (t/formatter "yyyy-MM-dd в H:m:s" :date-time)]
-    (when date
-      (t/print formatter date))))
-
-; добавим фильтр для использования в шаблоне
-(filters/add-filter! :format-datetime
-                     (fn [content]
-                       [:safe (format-date-and-time content)]))
 
 ; Добавим тэг с полем для форм в нем будет находится
 ; автоматически созданное поле с anti-forgery ключом

@@ -1,6 +1,7 @@
 (ns clojure-site.handler
-  (:require [compojure.core :refer :all]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+  (:require
+    [clojure-site.routes :refer [mail-routes]]
+    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
 (def app
-  (wrap-defaults clojure-site.routes site-defaults))
+  (wrap-defaults mail-routes site-defaults))
