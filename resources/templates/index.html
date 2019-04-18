@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Письма</h1>
+<h1 class="p-3">Письма</h1>
 
 {% if mails %}
-<ul>
+<ul class="pr-5">
 
-    {% for mail in mails %}
-    <li>
-        <h4><a href="/mail/{{mail._id}}">{{mail.subject}}</a></h4>
-        <hr>
-        <a href="/edit/{{mail._id}}">Редактировать</a> | <a href="/delete/{{mail._id}}">Удалить</a>
-    </li>
-    {% endfor %}
+    <!-- card-columns -->
+    <div class="card-columns">
+        {% for mail in mails %}
+                <a href="/mail/{{mail._id}}" class="card-link">
+                    <div class="card m-3">
+                        <div class="card-body">
+                            <h4 class="card-title">{{mail.subject}}</h4>
+                            <h6 class="card-title">{{mail.text}}</h6>
+                            <a href="/edit/{{mail._id}}" class="card-link">Редактировать</a>
+                            <a href="/delete/{{mail._id}}" class="card-link">Удалить</a>
+                        </div>
+                    </div>
+                </a>
+        {% endfor %}
+    </div>
 
 </ul>
 {% else %}

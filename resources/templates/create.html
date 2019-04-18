@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Создать пистмо</h1>
+<h1 class="p-3">Создать письмо</h1>
 
-<form method="POST" action="/create">
+<form method="POST" class="m-3">
 
     {% csrf-field %}
 
-    <p>
-        <label>Заголовок</label><br>
-        <input type="text" name="subject" placeholder="Заголовок">
-    </p>
+    <h5>
+        <label>Заголовок:</label><br>
+        <input type="text" name="subject" placeholder="Заголовок письма">
+    </h5>
 
-    <p>
-        <label>Текст</label><br>
-        <textarea name="text"></textarea>
-    </p>
+    <h5>
+        <label>Текст:</label><br>
+        <textarea name="text" placeholder="Текст письма в формате HTML"></textarea>
+    </h5>
 
-    <input type="submit" value="Создать">
+    <button type="submit" value="Создать">Создать</button>
 
 </form>
 
