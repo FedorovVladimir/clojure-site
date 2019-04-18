@@ -29,7 +29,7 @@
   ; Переформатируем строку в id
   ; todo редактирование не работает
   (let [id (ObjectId. id)]
-    (m/update db "mail" {:id id} mail)))
+    (m/update db "mail" {:_id id} mail)))
 
 (defn get-mail
   "Получить письмо по ее id"
