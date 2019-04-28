@@ -1,30 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-
-<h1 class="p-3">Письма</h1>
-
+<div class="alert alert-info" role="alert">
+    <a href="/add" type="button" class="btn btn-info">Добавить рассылку</a>
+</div>
 {% if mails %}
-<ul class="pr-5">
+<h1 class="p-3">Рассылки</h1>
 
+<ul class="pr-5">
     <!-- card-columns -->
     <div class="card-columns">
         {% for mail in mails %}
-                <a href="/mail/{{mail._id}}" class="card-link">
-                    <div class="card m-3">
-                        <div class="card-body">
-                            <h4 class="card-title">{{mail.subject}}</h4>
-                            <h6 class="card-title">{{mail.text}}</h6>
-                            <a href="/edit/{{mail._id}}" class="card-link">Редактировать</a>
-                            <a href="/delete/{{mail._id}}" class="card-link">Удалить</a>
-                        </div>
+            <a href="/mail/{{mail._id}}" class="card-link">
+                <div class="card m-3">
+                    <div class="card-body">
+                        <h4 class="card-title">{{mail.subject}}</h4>
+                        <h6 class="card-title">{{mail.text}}</h6>
+                        <a href="/edit/{{mail._id}}" class="card-link">Редактировать</a>
+                        <a href="/delete/{{mail._id}}" class="card-link">Удалить</a>
                     </div>
-                </a>
+                </div>
+            </a>
         {% endfor %}
     </div>
-
 </ul>
 {% else %}
-<strong>Писем еще нет</strong>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center m-5">
+                Рассылок еще нет
+            </h4>
+        </div>
+    </div>
+</div>
 {% endif %}
 
 {% endblock %}

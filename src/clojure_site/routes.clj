@@ -6,7 +6,7 @@
     [compojure.route :as route]
 
     ; контроллеры запросов
-    [clojure-site.controllers :as c]
+    ;[clojure-site.controllers :as c]
 
     ; отображение страниц
     [clojure-site.views :as v]
@@ -17,36 +17,20 @@
 ; объявляем маршруты
 (defroutes mail-routes
 
-           ; страница просмотра письма
-           (GET "/mail/:id" [id]
-             (let [mail (db/get-mail id)]
-               (v/mail mail)))
-
-           ; контроллер удаления письма по id
-           (GET "/delete/:id" [id]
-             (c/delete id))
-
-           ; обработчик редактирования письма
-           (POST "/edit/:id" request
-             (-> c/edit))
-
-           ; страница редактирования письма
-           (GET "/edit/:id" [id]
-             (let [mail (db/get-mail id)]
-               (v/edit mail)))
-
-           ; обработчик добавления письма
-           (POST "/create" request
-             (-> c/create))
-
-           ; страница добавления письма
-           (GET "/create" []
-             (v/create))
-
            ; главная страница приложения
            (GET "/" []
-             (let [mails (db/get-mails)]
-               (v/index mails)))
+             (let [mailings (db/get-mailings)]
+               (v/index mailings)))
+
+           ; страница баз
+           (GET "/bases" []
+             (let [bases (db/get-bases)]
+               (v/bases bases)))
+
+           ; страница шаблонов
+           (GET "/templates" []
+             (let [templates (db/get-templates)]
+               (v/templates templates)))
 
            ; ошибка 404
            (route/not-found "Ничего не найдено"))

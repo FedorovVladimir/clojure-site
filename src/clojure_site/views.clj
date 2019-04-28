@@ -32,30 +32,19 @@
       response
       (content-type "text/html; charset=utf-8")))
 
-(defn mail
-  "Страница просмотра письма"
-  [mail]
-  (render "mail.html"
-          ; передаем данные в шаблон
-          {:mail mail}))
-
-(defn edit
-  "Страница редактирования письма"
-  [mail]
-  (render "edit.html"
-          ; передаем данные в шаблон
-          {:mail mail}))
-
-(defn create
-  "Страница создания письма"
-  []
-  (render "create.html"))
-
 (defn index
   "Главная страница приложения. Список писем"
   [mails]
   (render "index.html"
-          ; Передаем данные в шаблон
-          ; Если mails пуст вернуть false
           {:mails (if (not-empty mails)
                     mails false)}))
+
+(defn bases [bases]
+  (render "bases.html"
+          {:bases (if (not-empty bases)
+                    bases false)}))
+
+(defn templates [templates]
+  (render "templates.html"
+          {:templates (if (not-empty templates)
+                        templates false)}))
