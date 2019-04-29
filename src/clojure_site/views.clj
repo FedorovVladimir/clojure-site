@@ -35,10 +35,10 @@
 
 (defn index
   "Главная страница приложения. Список писем"
-  [mails]
+  [mailing]
   (render "index.html"
-          {:mails (if (not-empty mails)
-                    mails false)}))
+          {:mailings (if (not-empty mailing)
+                       mailing false)}))
 
 (defn bases [bases]
   (render "bases.html"
@@ -48,13 +48,6 @@
 (defn base-add-form []
   (render "base_add_form.html"))
 
-(defn email-add-form [bases base]
-  (render "email_add_form.html"
-          {:bases (if (not-empty bases)
-                    bases false)
-           :base (if (not-empty base)
-                     base false)}))
-
 (defn base-info [base emails]
   (render "base_info.html"
           {:base (if (not-empty base)
@@ -62,7 +55,22 @@
            :emails (if (not-empty emails)
                      emails false)}))
 
+(defn email-add-form [bases base]
+  (render "email_add_form.html"
+          {:bases (if (not-empty bases)
+                    bases false)
+           :base (if (not-empty base)
+                     base false)}))
+
 (defn templates [templates]
   (render "templates.html"
           {:templates (if (not-empty templates)
                         templates false)}))
+
+(defn mailing-add-form [bases base]
+  "/add"
+  (render "mailing_add_form.html"
+          {:bases (if (not-empty bases)
+                    bases false)
+           :base (if (not-empty base)
+                   base false)}))

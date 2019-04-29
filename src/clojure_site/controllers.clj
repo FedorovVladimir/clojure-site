@@ -27,7 +27,7 @@
   [request]
   (let [email {:email (get-in request [:form-params "email"])
               :name (get-in request [:form-params "name"])
-              :base (get-in request [:form-params "base"])}]
+              :base (db/get-base (get-in request [:form-params "base"]))}]
 
     (if (and (not-empty (:email email))
              (not-empty (:name email))
@@ -38,3 +38,28 @@
         (redirect "/bases"))
 
       "Проверьте правильность введенных данных")))
+
+(defn mailing-add
+  "Создание рассылки"
+  [request]
+  (let [mailing {:subject(get-in request [:form-params "subject"])
+               :text (get-in request [:form-params "text"])
+               :base (db/get-base (get-in request [:form-params "base"]))}]
+
+    (if (and (not-empty (:subject mailing))
+             (not-empty (:text mailing))
+             (not-empty (:base mailing)))
+
+      (do
+        (db/create-mailing mailing)
+        (redirect "/"))
+
+      "Проверьте правильность введенных данных")))
+
+(defn mailing-del
+  "Удаление рассылки"
+  [id]
+  (println id)
+  (do
+    (db/remove-mailing id)
+    (redirect "/")))

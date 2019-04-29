@@ -45,3 +45,12 @@
 
 (defn get-emails [baseId]
   (m/find-maps db "email" {:base baseId}))
+
+(defn create-mailing [mailing]
+  (let [object-id (ObjectId.)]
+    (m/insert db "mailing" (assoc mailing :_id object-id))))
+
+(defn remove-mailing [id]
+  (println id)
+  (let [id (ObjectId. id)]
+    (m/remove-by-id db "mailing" id)))

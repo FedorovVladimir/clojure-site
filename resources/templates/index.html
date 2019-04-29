@@ -3,26 +3,42 @@
 <div class="alert alert-info" role="alert">
     <a href="/add" type="button" class="btn btn-info">Добавить рассылку</a>
 </div>
-{% if mails %}
+{% if mailings %}
 <h1 class="p-3">Рассылки</h1>
 
-<ul class="pr-5">
-    <!-- card-columns -->
-    <div class="card-columns">
-        {% for mail in mails %}
-            <a href="/mail/{{mail._id}}" class="card-link">
-                <div class="card m-3">
-                    <div class="card-body">
-                        <h4 class="card-title">{{mail.subject}}</h4>
-                        <h6 class="card-title">{{mail.text}}</h6>
-                        <a href="/edit/{{mail._id}}" class="card-link">Редактировать</a>
-                        <a href="/delete/{{mail._id}}" class="card-link">Удалить</a>
+<div class="container-fluid">
+    {% for mailing in mailings %}
+        <div class="row mb-4">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4 card pt-3">
+                <div class="mb-1 pb-2 alert alert-info">
+                    {{ mailing.base.name }}
+                </div>
+                <h2>
+                    {{mailing.subject}}
+                </h2>
+                <p>
+                    {{mailing.text}}
+                </p>
+<!--                <p>-->
+<!--                    <a href="/mailing/{{ mailing._id }}">подробнее</a>-->
+<!--                </p>-->
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/del/{{ mailing._id }}" type="button" class="btn btn-danger">Удалить рассылку</a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
                     </div>
                 </div>
-            </a>
-        {% endfor %}
-    </div>
-</ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% else %}
 <div class="container-fluid">
     <div class="row">

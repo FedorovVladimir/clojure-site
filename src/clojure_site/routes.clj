@@ -22,6 +22,19 @@
              (let [mailings (db/get-mailings)]
                (v/index mailings)))
 
+           ; страница с формой создания рассылки
+           (GET "/add" []
+             (let [bases (db/get-bases)]
+               (v/mailing-add-form bases nil)))
+
+           ; обработчик создания рассылки
+           (POST "/add" [request]
+             (-> c/mailing-add))
+
+           ; обработчик удаления рассылки
+           (GET "/del/:id" [id]
+             (c/mailing-del id))
+
            ; страница баз
            (GET "/bases" []
              (let [bases (db/get-bases)]
