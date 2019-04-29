@@ -7,49 +7,34 @@
     ; функция для взаимодействия с БД
     [clojure-site.db :as db]))
 
-(defn delete
-  "Контроллер удаления письма"
-  [id]
-  (do
-    (db/remove-mail id)
-    (redirect "/")))
-
-(defn edit
-  "Контроллер редактирования письма"
+(defn base-add
+  "Создание базы"
   [request]
+  (let [base {:name (get-in request [:form-params "name"])
+              :description (get-in request [:form-params "description"])}]
 
-  ; получаем данные из формы
-  (let [mail-id (get-in request [:form-params "id"])
-        mail {:subject (get-in request [:form-params "subject"])
-              :text  (get-in request [:form-params "text"])}]
+    (if (and (not-empty (:name base))
+             (not-empty (:description base)))
 
-    ; проверяем данные
-    (if (and (not-empty (:subject mail))
-             (not-empty (:text mail)))
-      ; все хорошо
       (do
-        (db/update-mail mail-id mail)
-        (redirect "/"))
-      ; ошибка
+        (db/create-base base)
+        (redirect "/bases"))
+
       "Проверьте правильность введенных данных")))
 
-(defn create
-  "Контролер создания письма"
+(defn emails-add
+  "Создание email"
   [request]
+  (let [email {:email (get-in request [:form-params "email"])
+              :name (get-in request [:form-params "name"])
+              :base (get-in request [:form-params "base"])}]
 
-  ; получаем данные из формы
-  ; (ассоциативный массив)
-  (let [mail {:subject (get-in request [:form-params "subject"])
-              :text (get-in request [:form-params "text"])}]
+    (if (and (not-empty (:email email))
+             (not-empty (:name email))
+             (not-empty (:base email)))
 
-    ; Проверим данные
-    (if (and (not-empty (:subject mail))
-             (not-empty (:text mail)))
-
-      ; все хорошо
       (do
-        (db/create-mail mail)
-        (redirect "/"))
+        (db/create-email email)
+        (redirect "/bases"))
 
-      ; ошибка
       "Проверьте правильность введенных данных")))

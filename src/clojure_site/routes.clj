@@ -6,7 +6,7 @@
     [compojure.route :as route]
 
     ; контроллеры запросов
-    ;[clojure-site.controllers :as c]
+    [clojure-site.controllers :as c]
 
     ; отображение страниц
     [clojure-site.views :as v]
@@ -26,6 +26,34 @@
            (GET "/bases" []
              (let [bases (db/get-bases)]
                (v/bases bases)))
+
+           ; страница с формой создания базы
+           (GET "/bases/add" []
+               (v/base-add-form))
+
+           ; обработчик создания базы
+           (POST "/bases/add" [request]
+             (-> c/base-add))
+
+           ; страница с информацией о базе
+           (GET "/bases/:id" [id]
+             (let [base (db/get-base id)
+                   emails (db/get-emails id)]
+               (v/base-info base emails)))
+
+           ; страница с формой создания email
+           (GET "/emails/add" []
+             (let [bases (db/get-bases)]
+               (v/email-add-form bases nil)))
+
+           ; страница с формой создания email с заданой базой
+           (GET "/emails/add/:idBase" [idBase]
+             (let [base (db/get-base idBase)]
+               (v/email-add-form nil base)))
+
+           ; обработчик создания email с заданой базой
+           (POST "/emails/add" [request]
+             (-> c/emails-add))
 
            ; страница шаблонов
            (GET "/templates" []

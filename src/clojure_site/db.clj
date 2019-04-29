@@ -26,7 +26,22 @@
   []
   (m/find-maps db "base"))
 
+(defn create-base [base]
+  (let [object-id (ObjectId.)]
+    (m/insert db "base" (assoc base :_id object-id))))
+
+(defn get-base [id]
+  (let [id (ObjectId. id)]
+    (m/find-map-by-id db "base" id)))
+
 (defn get-templates []
   "Получение всех шаблонов"
   []
   (m/find-maps db "templates"))
+
+(defn create-email [email]
+  (let [object-id (ObjectId.)]
+    (m/insert db "email" (assoc email :_id object-id))))
+
+(defn get-emails [baseId]
+  (m/find-maps db "email" {:base baseId}))

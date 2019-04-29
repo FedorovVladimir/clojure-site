@@ -2,24 +2,25 @@
 {% block content %}
 <div class="alert alert-info" role="alert">
     <a href="/bases/add" type="button" class="btn btn-info">Добавить базу</a>
+    <a href="/emails/add" type="button" class="btn btn-info">Добавить email</a>
 </div>
 {% if bases %}
 <h1 class="p-3">Базы</h1>
 
 <div class="container-fluid">
     {% for base in bases %}
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-md-4">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 card pt-3">
                 <h2>
                     {{ base.name }}
                 </h2>
                 <p>
-                    {{ base.text }}
+                    {{ base.description }}
                 </p>
                 <p>
-                    <a class="btn" href="/bases/{{ base._id }}">подробнее</a>
+                    <a type="button" class="btn btn-info" href="/bases/{{ base._id }}">подробнее</a>
                 </p>
             </div>
             <div class="col-md-4">

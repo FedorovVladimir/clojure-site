@@ -8,7 +8,8 @@
     [ring.util.response :refer [content-type response]]
 
     ; для CSRF защиты
-    [ring.util.anti-forgery :refer [anti-forgery-field]]))
+    [ring.util.anti-forgery :refer [anti-forgery-field]]
+    [clojure-site.db :as db]))
 
 ; подскажем Selmer где искать наши шаблоны
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
@@ -43,6 +44,23 @@
   (render "bases.html"
           {:bases (if (not-empty bases)
                     bases false)}))
+
+(defn base-add-form []
+  (render "base_add_form.html"))
+
+(defn email-add-form [bases base]
+  (render "email_add_form.html"
+          {:bases (if (not-empty bases)
+                    bases false)
+           :base (if (not-empty base)
+                     base false)}))
+
+(defn base-info [base emails]
+  (render "base_info.html"
+          {:base (if (not-empty base)
+                   base false)
+           :emails (if (not-empty emails)
+                     emails false)}))
 
 (defn templates [templates]
   (render "templates.html"
